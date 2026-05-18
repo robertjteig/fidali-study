@@ -1,0 +1,2455 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIDALI — Keyword Intelligence · First Day Light</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    /* FIDALI palette — soft warm beige with deep accents */
+    --cream: #f0e8d8;
+    --cream-2: #e8dfcb;
+    --cream-3: #ddd1b8;
+    --sand: #c9b896;
+    --warm-grey: #a89a7e;
+    --stone: #6b5e4a;
+    --ink: #2a241c;
+    --ink-soft: #4a4136;
+    --ink-mute: #847866;
+
+    /* Accent — burgundy / terracotta from holidays moodboard */
+    --burgundy: #6b1f2a;
+    --terracotta: #b5573d;
+    --rose: #c89186;
+    --deep-red: #8a2a2a;
+    --gold: #c9985a;
+
+    --line: rgba(42,36,28,0.12);
+    --line-strong: rgba(42,36,28,0.25);
+
+    --display: 'Cormorant Garamond', 'Times New Roman', serif;
+    --sans: 'Inter Tight', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.5;
+    overflow-x: hidden;
+    font-weight: 400;
+  }
+
+  /* Subtle paper texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.35;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.42 0 0 0 0 0.3 0 0 0 0.12 0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .wrap {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 48px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ============== TOP MARK ============== */
+  .topmark {
+    border-bottom: 1px solid var(--line);
+    padding: 22px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ink-mute);
+  }
+  .topmark .brand {
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    color: var(--ink);
+    text-transform: none;
+  }
+  .topmark .right {
+    display: flex;
+    gap: 32px;
+  }
+
+  /* ============== HERO ============== */
+  .hero {
+    padding: 140px 0 120px;
+    position: relative;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: end;
+  }
+  .hero .kicker {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--burgundy);
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .hero .kicker::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line-strong);
+    max-width: 80px;
+  }
+  .hero h1 {
+    font-family: var(--display);
+    font-size: clamp(56px, 9vw, 144px);
+    font-weight: 300;
+    line-height: 0.92;
+    letter-spacing: -0.015em;
+    margin-bottom: 32px;
+    color: var(--ink);
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--burgundy);
+    font-weight: 400;
+  }
+  .hero .lead {
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 520px;
+    font-style: italic;
+  }
+  .hero-right {
+    padding-bottom: 8px;
+  }
+  .hero-right .stat-pair {
+    border-top: 1px solid var(--line-strong);
+    padding: 28px 0;
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 32px;
+    align-items: baseline;
+  }
+  .hero-right .stat-pair:last-child {
+    border-bottom: 1px solid var(--line-strong);
+  }
+  .hero-right .stat-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink-mute);
+    padding-top: 8px;
+  }
+  .hero-right .stat-value {
+    font-family: var(--display);
+    font-size: 56px;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .hero-right .stat-value em {
+    font-style: italic;
+    color: var(--burgundy);
+  }
+  .hero-right .stat-sub {
+    font-size: 12px;
+    color: var(--ink-mute);
+    margin-top: 6px;
+    font-family: var(--mono);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* Decorative element */
+  .decoration {
+    position: absolute;
+    top: 200px;
+    right: -100px;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--rose) 0%, var(--burgundy) 50%, transparent 70%);
+    opacity: 0.15;
+    filter: blur(40px);
+    z-index: -1;
+  }
+
+  /* ============== SECTION ============== */
+  section {
+    padding: 120px 0;
+    border-top: 1px solid var(--line);
+    position: relative;
+  }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 64px;
+    margin-bottom: 80px;
+    align-items: start;
+  }
+  .section-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--burgundy);
+    padding-top: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-num::before {
+    content: '';
+    width: 24px; height: 1px;
+    background: var(--burgundy);
+  }
+  .section-title {
+    font-family: var(--display);
+    font-size: clamp(42px, 6vw, 80px);
+    font-weight: 300;
+    line-height: 0.98;
+    letter-spacing: -0.015em;
+    margin-bottom: 24px;
+    color: var(--ink);
+  }
+  .section-title em {
+    font-style: italic;
+    color: var(--burgundy);
+    font-weight: 400;
+  }
+  .section-desc {
+    font-family: var(--display);
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 640px;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  /* ============== FILTERS ============== */
+  .filters {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--line);
+  }
+  .filter-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink-mute);
+    margin-right: 8px;
+  }
+  .chip {
+    background: transparent;
+    border: 1px solid var(--line-strong);
+    color: var(--ink-soft);
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    padding: 10px 18px;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .chip:hover {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+  .chip.active {
+    background: var(--ink);
+    color: var(--cream);
+    border-color: var(--ink);
+  }
+  .chip .dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: 1px;
+  }
+
+  /* ============== CLUSTERS ============== */
+  .clusters {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+  .cluster {
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 40px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    position: relative;
+    background: transparent;
+  }
+  .cluster:hover {
+    background: var(--cream-2);
+  }
+  .cluster.open {
+    background: var(--cream-2);
+  }
+  .cluster-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+  .cluster-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-mute);
+    letter-spacing: 0.2em;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+  .cluster-name {
+    font-family: var(--display);
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .cluster-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .cluster-vol {
+    font-family: var(--display);
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--burgundy);
+    font-style: italic;
+    letter-spacing: -0.01em;
+  }
+  .cluster-vol-sub {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-mute);
+  }
+  .cluster-intent {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink-soft);
+    padding: 6px 12px;
+    border: 1px solid var(--line-strong);
+    margin-top: 16px;
+  }
+  .cluster-intent .d {
+    width: 6px; height: 6px; border-radius: 50%;
+  }
+  .intent-info .d { background: var(--sand); }
+  .intent-trans .d { background: var(--burgundy); }
+  .intent-comm .d { background: var(--gold); }
+  .intent-nav .d { background: var(--terracotta); }
+
+  .toggle-icon {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--line-strong);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-soft);
+    transition: all 0.3s ease;
+    font-size: 16px;
+    line-height: 1;
+    font-weight: 300;
+  }
+  .cluster.open .toggle-icon {
+    background: var(--burgundy);
+    border-color: var(--burgundy);
+    color: var(--cream);
+    transform: rotate(45deg);
+  }
+
+  .cluster-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+  }
+  .cluster.open .cluster-details {
+    max-height: 900px;
+    margin-top: 32px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line-strong);
+  }
+  .longtail-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink-mute);
+    margin-bottom: 16px;
+  }
+  .longtail {
+    list-style: none;
+  }
+  .longtail li {
+    padding: 10px 0;
+    font-size: 14px;
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--sans);
+  }
+  .longtail li::before {
+    content: '—';
+    color: var(--burgundy);
+    margin-right: 14px;
+    font-family: var(--display);
+    font-style: italic;
+  }
+  .longtail li > span:first-of-type { flex: 1; }
+  .longtail li .lt-vol {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-mute);
+    letter-spacing: 0.05em;
+  }
+  .competition {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 16px;
+    align-items: center;
+  }
+  .comp-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-mute);
+  }
+  .comp-bar {
+    height: 2px;
+    background: var(--line);
+    overflow: hidden;
+  }
+  .comp-fill {
+    height: 100%;
+    background: var(--burgundy);
+  }
+  .comp-value {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink);
+    letter-spacing: 0.05em;
+  }
+
+  /* ============== SEASONALITY ============== */
+  .season-card {
+    margin-top: 32px;
+  }
+  .season-card h3 {
+    font-family: var(--display);
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .season-card .sub {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink-mute);
+    margin-bottom: 32px;
+  }
+
+  .heatmap {
+    display: grid;
+    grid-template-columns: 280px repeat(12, 1fr);
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+    background: transparent;
+    font-size: 11px;
+  }
+  .heat-h {
+    padding: 14px 8px;
+    font-family: var(--mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-mute);
+    text-align: center;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line-strong);
+  }
+  .heat-h.label {
+    text-align: left;
+    padding-left: 20px;
+  }
+  .heat-row-label {
+    padding: 18px 20px;
+    font-family: var(--display);
+    font-size: 16px;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    gap: 12px;
+  }
+  .heat-row-label .vol {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--ink-mute);
+    letter-spacing: 0.05em;
+  }
+  .heat-cell {
+    padding: 18px 4px;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    position: relative;
+    cursor: default;
+    transition: filter 0.2s ease;
+    letter-spacing: 0.03em;
+  }
+  .heat-cell:hover { filter: brightness(0.92); }
+  .heat-cell::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-4px);
+    background: var(--ink);
+    color: var(--cream);
+    padding: 6px 10px;
+    font-size: 9px;
+    font-family: var(--mono);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    z-index: 10;
+  }
+  .heat-cell:hover::after { opacity: 1; }
+
+  .legend-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 28px;
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink-mute);
+    flex-wrap: wrap;
+  }
+  .legend-bar {
+    display: flex;
+    height: 8px;
+    width: 200px;
+    border: 1px solid var(--line);
+  }
+  .legend-bar span {
+    flex: 1;
+  }
+
+  /* ============== TIMING ============== */
+  .timing {
+    margin-top: 64px;
+    padding: 56px;
+    background: var(--cream-2);
+    border: 1px solid var(--line);
+  }
+  .timing h3 {
+    font-family: var(--display);
+    font-size: 36px;
+    font-weight: 400;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+  .timing h3 em { font-style: italic; color: var(--burgundy); }
+  .timing .timing-sub {
+    font-family: var(--display);
+    font-style: italic;
+    color: var(--ink-soft);
+    margin-bottom: 40px;
+    font-size: 17px;
+    max-width: 580px;
+    line-height: 1.5;
+  }
+  .timing-track {
+    display: grid;
+    grid-template-columns: 220px repeat(12, 1fr);
+    gap: 0;
+    background: var(--cream);
+    border: 1px solid var(--line);
+  }
+  .timing-month {
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line-strong);
+    border-right: 1px solid var(--line);
+  }
+  .timing-month.q4 {
+    color: var(--burgundy);
+    background: rgba(107,31,42,0.05);
+  }
+  .timing-month.q2 {
+    color: var(--terracotta);
+    background: rgba(181,87,61,0.05);
+  }
+  .timing-month.label {
+    text-align: left;
+    padding-left: 20px;
+    font-family: var(--display);
+    font-size: 13px;
+    font-style: italic;
+    color: var(--ink);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .timing-row {
+    display: contents;
+  }
+  .timing-label {
+    font-family: var(--display);
+    font-size: 16px;
+    font-style: italic;
+    padding: 22px 20px;
+    color: var(--ink);
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .timing-cell {
+    padding: 22px 0;
+    position: relative;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .timing-bar {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 8px;
+    left: 0; right: 0;
+  }
+  .timing-bar.prep { background: var(--sand); opacity: 0.6; }
+  .timing-bar.publish { background: var(--terracotta); }
+  .timing-bar.peak { background: var(--burgundy); }
+
+  .timing-legend {
+    display: flex;
+    gap: 32px;
+    margin-top: 32px;
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink-soft);
+    flex-wrap: wrap;
+  }
+  .timing-legend span {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .timing-legend i {
+    display: inline-block;
+    width: 24px;
+    height: 8px;
+  }
+
+  /* ============== INTENT DISTRIBUTION ============== */
+  .intent-viz {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    margin-top: 64px;
+    align-items: center;
+  }
+  .donut-wrap {
+    position: relative;
+    aspect-ratio: 1;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  .donut-center {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+  .donut-center .num {
+    font-family: var(--display);
+    font-size: 64px;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+  .donut-center .lbl {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink-mute);
+    margin-top: 8px;
+  }
+  .intent-list {
+    list-style: none;
+  }
+  .intent-list li {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    gap: 20px;
+    align-items: center;
+  }
+  .intent-list li:first-child { border-top: 1px solid var(--line-strong); }
+  .intent-list li:last-child { border-bottom: 1px solid var(--line-strong); }
+  .intent-list .swatch {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+  .intent-list .name {
+    font-family: var(--display);
+    font-size: 18px;
+    font-style: italic;
+  }
+  .intent-list .pct {
+    font-family: var(--display);
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--burgundy);
+    letter-spacing: -0.01em;
+  }
+  .intent-list .vol {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-mute);
+  }
+
+  /* ============== INSIGHTS ============== */
+  .insights {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+  .insight {
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 48px;
+    position: relative;
+    background: transparent;
+  }
+  .insight .ico {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 64px;
+    font-weight: 300;
+    color: var(--burgundy);
+    line-height: 0.8;
+    margin-bottom: 24px;
+    letter-spacing: -0.04em;
+  }
+  .insight h4 {
+    font-family: var(--display);
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+  .insight p {
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+  }
+  .insight.dark {
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .insight.dark .ico { color: var(--rose); }
+  .insight.dark h4 { color: var(--cream); }
+  .insight.dark p { color: var(--cream-3); }
+
+  /* ============== MARKET BARS (US) ============== */
+  .market-headline {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid var(--line-strong);
+    border-left: 1px solid var(--line);
+    margin-bottom: 64px;
+  }
+  .market-stat {
+    padding: 40px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line-strong);
+  }
+  .market-stat .label {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink-mute);
+    margin-bottom: 16px;
+  }
+  .market-stat .value {
+    font-family: var(--display);
+    font-size: 64px;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .market-stat .value em {
+    font-style: italic;
+    color: var(--burgundy);
+  }
+  .market-stat .sub {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink-soft);
+  }
+
+  /* Growth bars chart */
+  .growth-chart {
+    margin-top: 48px;
+  }
+  .growth-row {
+    display: grid;
+    grid-template-columns: 200px 1fr 100px;
+    gap: 24px;
+    align-items: center;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .growth-row:first-child { border-top: 1px solid var(--line-strong); }
+  .growth-row:last-child { border-bottom: 1px solid var(--line-strong); }
+  .growth-label {
+    font-family: var(--display);
+    font-size: 17px;
+    font-style: italic;
+  }
+  .growth-bar-wrap {
+    height: 28px;
+    background: rgba(42,36,28,0.04);
+    position: relative;
+    overflow: visible;
+  }
+  .growth-bar-fill {
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    background: linear-gradient(90deg, var(--terracotta) 0%, var(--burgundy) 100%);
+    transition: width 1.2s cubic-bezier(0.16,1,0.3,1);
+  }
+  .growth-bar-fill.green {
+    background: linear-gradient(90deg, var(--sand) 0%, var(--stone) 100%);
+  }
+  .growth-bar-fill.gold {
+    background: linear-gradient(90deg, #e0b870 0%, var(--gold) 100%);
+  }
+  .growth-value {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink);
+    text-align: right;
+    letter-spacing: 0.05em;
+  }
+
+  /* Trend cards */
+  .trend-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 80px;
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+  .trend-card {
+    padding: 36px 32px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+  .trend-num {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 56px;
+    font-weight: 300;
+    color: var(--burgundy);
+    line-height: 0.8;
+    margin-bottom: 20px;
+    letter-spacing: -0.04em;
+  }
+  .trend-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink-mute);
+    margin-bottom: 12px;
+  }
+  .trend-title {
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 14px;
+    letter-spacing: -0.01em;
+  }
+  .trend-desc {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+  .trend-arrow {
+    margin-top: 16px;
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--terracotta);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .trend-arrow::before {
+    content: '→';
+    font-family: var(--display);
+    font-style: italic;
+    color: var(--burgundy);
+    font-size: 16px;
+  }
+
+  /* ============== GERMANY COMPARISON ============== */
+  .country-compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid var(--line-strong);
+    border-left: 1px solid var(--line);
+    margin-top: 48px;
+  }
+  .country-card {
+    padding: 40px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+  .country-card.focus {
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .country-flag {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--ink-mute);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .country-card.focus .country-flag { color: var(--cream-3); }
+  .country-flag .stripe {
+    width: 24px; height: 2px;
+    background: var(--burgundy);
+  }
+  .country-card.focus .country-flag .stripe { background: var(--rose); }
+  .country-name {
+    font-family: var(--display);
+    font-size: 36px;
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: 24px;
+    letter-spacing: -0.015em;
+  }
+  .country-card.focus .country-name { color: var(--cream); }
+  .country-data {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+  .country-card.focus .country-data { border-top-color: rgba(240,232,216,0.2); }
+  .country-metric .lbl {
+    font-family: var(--mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-mute);
+    margin-bottom: 6px;
+  }
+  .country-card.focus .country-metric .lbl { color: var(--cream-3); }
+  .country-metric .val {
+    font-family: var(--display);
+    font-size: 26px;
+    font-weight: 300;
+    color: var(--burgundy);
+    letter-spacing: -0.01em;
+  }
+  .country-card.focus .country-metric .val { color: var(--rose); }
+  .country-body {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  .country-card.focus .country-body { color: var(--cream-3); font-style: italic; }
+
+  .verdict {
+    margin-top: 24px;
+    padding: 14px 18px;
+    border: 1px solid var(--line-strong);
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .country-card.focus .verdict {
+    border-color: var(--rose);
+    color: var(--rose);
+  }
+  .verdict .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--burgundy);
+  }
+  .verdict.go .dot { background: var(--accent-3, #7a9b6e); }
+  .verdict.go { color: #5a7a52; }
+  .verdict.wait .dot { background: var(--gold); }
+  .verdict.wait { color: #8a6920; }
+
+  /* DE keyword bars */
+  .de-keywords {
+    margin-top: 64px;
+    padding: 48px;
+    background: var(--cream-2);
+    border: 1px solid var(--line);
+  }
+  .de-keywords h4 {
+    font-family: var(--display);
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+  .de-keywords .sub {
+    font-family: var(--display);
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 16px;
+    margin-bottom: 32px;
+  }
+  .kw-pair {
+    display: grid;
+    grid-template-columns: 200px 1fr 90px;
+    gap: 20px;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .kw-pair:first-child { border-top: 1px solid var(--line-strong); }
+  .kw-pair:last-child { border-bottom: 1px solid var(--line-strong); }
+  .kw-de {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink);
+  }
+  .kw-bar-wrap {
+    height: 8px;
+    background: rgba(42,36,28,0.06);
+  }
+  .kw-bar-fill {
+    height: 100%;
+    background: var(--burgundy);
+  }
+  .kw-vol {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink);
+    text-align: right;
+    letter-spacing: 0.05em;
+  }
+
+  /* ============== ROADMAP ============== */
+  .roadmap {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 0;
+    border-top: 1px solid var(--line-strong);
+    margin-top: 24px;
+  }
+  .phase {
+    display: contents;
+  }
+  .phase-time {
+    padding: 32px 0;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink-mute);
+    padding-right: 32px;
+  }
+  .phase-time .num {
+    display: block;
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 64px;
+    font-weight: 300;
+    color: var(--burgundy);
+    line-height: 1;
+    margin-bottom: 12px;
+    letter-spacing: -0.04em;
+  }
+  .phase-time .period {
+    color: var(--ink);
+    font-size: 11px;
+    margin-top: 4px;
+  }
+  .phase-content {
+    padding: 32px 0 32px 48px;
+    border-bottom: 1px solid var(--line);
+  }
+  .phase-title {
+    font-family: var(--display);
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .phase-title em {
+    font-style: italic;
+    color: var(--burgundy);
+  }
+  .phase-focus {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--terracotta);
+    margin-bottom: 24px;
+  }
+  .phase-actions {
+    list-style: none;
+    margin-bottom: 24px;
+  }
+  .phase-actions li {
+    padding: 10px 0;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    border-bottom: 1px dashed var(--line);
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+  }
+  .phase-actions li:last-child { border-bottom: none; }
+  .phase-actions li::before {
+    content: '';
+    flex-shrink: 0;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--burgundy);
+    transform: translateY(-2px);
+  }
+  .phase-kpi {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 16px;
+    padding: 14px 20px;
+    background: var(--cream-2);
+    margin-top: 8px;
+  }
+  .phase-kpi .lbl {
+    font-family: var(--mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink-mute);
+  }
+  .phase-kpi .val {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--burgundy);
+  }
+
+  /* Opportunity matrix */
+  .opportunity-matrix {
+    margin-top: 64px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+  .opp {
+    padding: 40px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .opp-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--terracotta);
+    margin-bottom: 16px;
+  }
+  .opp-title {
+    font-family: var(--display);
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+  .opp-title em { font-style: italic; color: var(--burgundy); }
+  .opp-body {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+  }
+  .opp-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+  .opp-meta .item {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-mute);
+  }
+  .opp-meta .item strong {
+    color: var(--burgundy);
+    font-weight: 500;
+    font-family: var(--display);
+    font-style: italic;
+    text-transform: none;
+    font-size: 16px;
+    letter-spacing: 0;
+    margin-left: 6px;
+  }
+
+  /* Responsive adjustments for new sections */
+  @media (max-width: 900px) {
+    .market-headline { grid-template-columns: 1fr; }
+    .market-stat .value { font-size: 44px; }
+    .trend-cards { grid-template-columns: 1fr 1fr; }
+    .country-compare { grid-template-columns: 1fr; }
+    .roadmap { grid-template-columns: 1fr; }
+    .phase-time { padding: 24px 0 0 0; border-right: none; }
+    .phase-content { padding: 16px 0 32px 0; }
+    .phase-time .num { font-size: 48px; }
+    .opportunity-matrix { grid-template-columns: 1fr; }
+    .opp { padding: 28px; }
+    .growth-row { grid-template-columns: 130px 1fr 70px; gap: 12px; }
+    .growth-label { font-size: 14px; }
+    .kw-pair { grid-template-columns: 130px 1fr 70px; gap: 12px; }
+    .de-keywords { padding: 28px 20px; }
+  }
+
+  /* ============== CLOSING ============== */
+  .closing {
+    padding: 180px 0 100px;
+    text-align: center;
+    position: relative;
+  }
+  .closing .marker {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--burgundy);
+    margin-bottom: 40px;
+  }
+  .closing h2 {
+    font-family: var(--display);
+    font-size: clamp(40px, 6vw, 80px);
+    font-weight: 300;
+    line-height: 1.05;
+    max-width: 1000px;
+    margin: 0 auto 40px;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .closing h2 em {
+    font-style: italic;
+    color: var(--burgundy);
+  }
+  .closing .signoff {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 20px;
+    color: var(--ink-soft);
+    max-width: 580px;
+    margin: 0 auto;
+    line-height: 1.55;
+  }
+
+  /* ============== FOOTER ============== */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 48px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink-mute);
+  }
+  footer .brand {
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    color: var(--ink);
+    text-transform: none;
+  }
+
+  /* ============== ANIMATIONS ============== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 1s ease, transform 1s cubic-bezier(0.16,1,0.3,1);
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Tab panel */
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ============== RESPONSIVE ============== */
+  @media (max-width: 900px) {
+    .wrap { padding: 0 24px; }
+    .hero { padding: 80px 0 60px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 56px; }
+    .hero-right .stat-pair { grid-template-columns: 1fr; gap: 8px; padding: 20px 0; }
+    .hero-right .stat-value { font-size: 42px; }
+    .section-head { grid-template-columns: 1fr; gap: 20px; margin-bottom: 56px; }
+    .clusters { grid-template-columns: 1fr; }
+    .cluster { padding: 28px; }
+    .heatmap { font-size: 9px; grid-template-columns: 140px repeat(12, 1fr); }
+    .heat-row-label { font-size: 12px; padding: 12px 10px; flex-direction: column; align-items: flex-start; gap: 4px; }
+    .heat-cell { padding: 12px 2px; font-size: 9px; }
+    .timing-track { grid-template-columns: 110px repeat(12, 1fr); }
+    .timing-label { font-size: 13px; padding: 14px 10px; }
+    .timing { padding: 32px 20px; }
+    .insights { grid-template-columns: 1fr; }
+    .insight { padding: 32px; }
+    .intent-viz { grid-template-columns: 1fr; gap: 32px; }
+    section { padding: 80px 0; }
+    .closing { padding: 100px 0 60px; }
+    footer { flex-direction: column; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- TOPMARK -->
+  <div class="topmark">
+    <div class="brand">FIDALI</div>
+    <div class="right">
+      <span>Market Study · NL · DE · US</span>
+      <span>RD — 2026</span>
+      <span>PAGE 001</span>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="decoration"></div>
+    <div class="hero-grid reveal">
+      <div>
+        <div class="kicker">First Day Light · Market Study · 2026</div>
+        <h1>
+          Van Nederlandse<br>
+          <em>kalender</em><br>
+          naar Duitse<br>
+          <em>kans</em>.
+        </h1>
+        <p class="lead">
+          Twintig Nederlandse keyword clusters, de Amerikaanse marktvoorsprong, en het Duitse vergrootglas. Een studie naar waar FIDALI nu staat, en waar het over twee jaar staat.
+        </p>
+      </div>
+
+      <div class="hero-right">
+        <div class="stat-pair">
+          <div class="stat-label">NL Clusters</div>
+          <div>
+            <div class="stat-value">20</div>
+            <div class="stat-sub">~18.4k zoekopd. /mnd</div>
+          </div>
+        </div>
+        <div class="stat-pair">
+          <div class="stat-label">DE Markt</div>
+          <div>
+            <div class="stat-value">€884<em>M</em></div>
+            <div class="stat-sub">kaarsenmarkt 2024</div>
+          </div>
+        </div>
+        <div class="stat-pair">
+          <div class="stat-label">VS CAGR</div>
+          <div>
+            <div class="stat-value">9.5<em>%</em></div>
+            <div class="stat-sub">LED kaarsen 2026–33</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== 01: CLUSTERS ========== -->
+  <section id="clusters">
+    <div class="section-head reveal">
+      <div class="section-num">01 / Clusters</div>
+      <div>
+        <h2 class="section-title">Twintig manieren waarop<br>iemand zoekt naar <em>licht</em>.</h2>
+        <p class="section-desc">Elk cluster is een eigen koper met een eigen moment. Klik om long tails, volume en concurrentie per cluster te onthullen.</p>
+      </div>
+    </div>
+
+    <div class="filters">
+      <span class="filter-label">Zoekintentie</span>
+      <button class="chip active" data-filter="all">Alle</button>
+      <button class="chip" data-filter="trans"><span class="dot" style="background:var(--burgundy)"></span>Transactioneel</button>
+      <button class="chip" data-filter="comm"><span class="dot" style="background:var(--gold)"></span>Commercieel</button>
+      <button class="chip" data-filter="info"><span class="dot" style="background:var(--sand)"></span>Informatief</button>
+      <button class="chip" data-filter="nav"><span class="dot" style="background:var(--terracotta)"></span>Navigationeel</button>
+    </div>
+
+    <div class="clusters" id="clusters-grid"></div>
+
+    <!-- Intent distribution -->
+    <div class="intent-viz reveal" style="margin-top:120px;">
+      <div>
+        <div style="font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:0.25em; color:var(--burgundy); margin-bottom:24px;">Verdeling van Intentie</div>
+        <h3 style="font-family:var(--display); font-size:48px; font-weight:300; line-height:1; letter-spacing:-0.015em; margin-bottom:24px;">Waar het verkeer<br><em>landt</em>.</h3>
+        <p style="font-family:var(--display); font-style:italic; font-size:18px; line-height:1.55; color:var(--ink-soft); max-width:420px;">Bijna driekwart van het zoekverkeer toont directe koopintentie. Een markt waar koopbereidheid hoger is dan gemiddeld voor decoratie-categorieën.</p>
+      </div>
+      <div>
+        <div class="donut-wrap">
+          <svg viewBox="0 0 200 200" style="width:100%; height:100%;">
+            <circle cx="100" cy="100" r="80" fill="none" stroke="var(--line)" stroke-width="1"/>
+            <g id="donut-segments"></g>
+          </svg>
+          <div class="donut-center">
+            <div class="num">18.4k</div>
+            <div class="lbl">per maand</div>
+          </div>
+        </div>
+        <ul class="intent-list" id="intent-list"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 02: SEASONALITY ========== -->
+  <section id="seasonality">
+    <div class="section-head reveal">
+      <div class="section-num">02 / Seizoen</div>
+      <div>
+        <h2 class="section-title">Het jaar in<br><em>twaalf vakjes</em>.</h2>
+        <p class="section-desc">Maandelijkse indexcijfers per cluster. November regeert voor kerstcontent, mei voor de buitenclusters. Sommige termen blijven het hele jaar door rustig — of juist consistent druk.</p>
+      </div>
+    </div>
+
+    <div class="season-card reveal">
+      <h3>Maandindex per cluster</h3>
+      <div class="sub">Schaal 0 — 100 · Hover voor exacte waarden</div>
+      <div class="heatmap" id="heatmap-candles"></div>
+      <div class="legend-row">
+        <span>Intensiteit</span>
+        <div class="legend-bar">
+          <span style="background:#f0e8d8"></span>
+          <span style="background:#e8d4b8"></span>
+          <span style="background:#d4a888"></span>
+          <span style="background:#b5573d"></span>
+          <span style="background:#8a2a2a"></span>
+          <span style="background:#6b1f2a"></span>
+        </div>
+        <span>laag → hoog</span>
+      </div>
+    </div>
+
+    <!-- Timing -->
+    <div class="timing reveal">
+      <h3>De <em>achterwaartse</em> kalender.</h3>
+      <p class="timing-sub">Google heeft 6–8 weken nodig om nieuwe content te ranken. Wie in oktober begint over kerst, is te laat. Plan voorbereiding, publicatie en piekvolume vanaf het einde terug.</p>
+
+      <div class="timing-track" id="timing-track"></div>
+
+      <div class="timing-legend">
+        <span><i style="background:var(--sand); opacity:0.6;"></i>Voorbereiding</span>
+        <span><i style="background:var(--terracotta);"></i>Publicatie</span>
+        <span><i style="background:var(--burgundy);"></i>Piekvolume</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 03: INSIGHTS ========== -->
+  <section id="insights">
+    <div class="section-head reveal">
+      <div class="section-num">03 / Strategie</div>
+      <div>
+        <h2 class="section-title">Wat de cijfers<br><em>vertellen</em>.</h2>
+        <p class="section-desc">Zes observaties die direct vertaalbaar zijn naar content-planning, campagne-allocatie en productpositionering voor FIDALI.</p>
+      </div>
+    </div>
+
+    <div class="insights reveal">
+      <div class="insight">
+        <div class="ico">i.</div>
+        <h4>Drie clusters dragen de helft.</h4>
+        <p>"LED kaarsen", "bewegende vlam" en "kerst" zijn samen goed voor meer dan 11.000 zoekopdrachten per maand — meer dan 60% van het totale niche-volume. Hier moet de basis van de SEO-strategie liggen.</p>
+      </div>
+
+      <div class="insight dark">
+        <div class="ico">ii.</div>
+        <h4>Kerst-SEO is een augustusproject.</h4>
+        <p>"LED kaarsen kerst" piekt in november, maar content moet uiterlijk eind augustus live staan. Google heeft 6–8 weken om te ranken. Wie in oktober begint, mist het hele seizoen organisch.</p>
+      </div>
+
+      <div class="insight">
+        <div class="ico">iii.</div>
+        <h4>Lage concurrentie, hoge specificiteit.</h4>
+        <p>Clusters rond "horeca" (480/mnd), "zwart" (390/mnd) en "groot formaat" hebben concurrentie-scores onder de 35. Ideale targets voor een merk dat boven op massa-aanbieders wil ranken.</p>
+      </div>
+
+      <div class="insight">
+        <div class="ico">iv.</div>
+        <h4>De evergreen ankers.</h4>
+        <p>"Bewegende vlam", "afstandsbediening" en "oplaadbaar" dalen nooit onder 48% van hun piek. Dit zijn de SEO-fundamenten waar het hele jaar door verkeer uitkomt — niet afhankelijk van seizoen.</p>
+      </div>
+
+      <div class="insight dark">
+        <div class="ico">v.</div>
+        <h4>B2B als zijgang.</h4>
+        <p>Het cluster "LED kaarsen horeca" heeft maar 480 zoekopdrachten per maand — maar de gemiddelde orderwaarde is een veelvoud. Eén landingspagina kan een hele B2B-pijplijn voeden.</p>
+      </div>
+
+      <div class="insight">
+        <div class="ico">vi.</div>
+        <h4>Mei is het tweede kerst.</h4>
+        <p>Het buiten-cluster en bruiloft-cluster piekken in mei–juli wanneer de kerstclusters op hun dieptepunt zitten. Een tweede seizoen, ander product, andere campagne — dezelfde organisatie.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 04: TOEKOMST — VS & WERELDMARKT ========== -->
+  <section id="future-us">
+    <div class="section-head reveal">
+      <div class="section-num">04 / Toekomst · VS</div>
+      <div>
+        <h2 class="section-title">Wat Amerika nu doet,<br>doet Nederland over<br><em>twee jaar</em>.</h2>
+        <p class="section-desc">De Verenigde Staten zijn het epicentrum van de LED kaarsen markt — North America houdt 30–32% van de wereldwijde kaarsenmarkt vast en zet de toon voor productinnovatie, kanaalstrategie en consumentenverwachting. De trends die daar nu volwassen worden, zijn de Nederlandse zoekvolumes van morgen.</p>
+      </div>
+    </div>
+
+    <div class="market-headline reveal">
+      <div class="market-stat">
+        <div class="label">Wereldwijde LED kaarsen markt</div>
+        <div class="value">$1.5<em>B</em></div>
+        <div class="sub">2024 — naar $3.5B in 2033</div>
+      </div>
+      <div class="market-stat">
+        <div class="label">VS aandeel kaarsenmarkt</div>
+        <div class="value">~30<em>%</em></div>
+        <div class="sub">van wereldmarkt</div>
+      </div>
+      <div class="market-stat">
+        <div class="label">CAGR LED kaarsen</div>
+        <div class="value">9.5<em>%</em></div>
+        <div class="sub">2026 — 2033 sterker dan wax</div>
+      </div>
+    </div>
+
+    <!-- Growth comparison -->
+    <div class="season-card reveal">
+      <h3>Groei per segment — <em style="font-style:italic; color:var(--burgundy);">2026 — 2033</em></h3>
+      <div class="sub">CAGR per categorie · wereldwijd</div>
+
+      <div class="growth-chart">
+        <div class="growth-row">
+          <div class="growth-label">LED / flameless kaarsen</div>
+          <div class="growth-bar-wrap"><div class="growth-bar-fill" style="width:95%;"></div></div>
+          <div class="growth-value">9.5%</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">LED tealight aufladbar</div>
+          <div class="growth-bar-wrap"><div class="growth-bar-fill gold" style="width:92%;"></div></div>
+          <div class="growth-value">10.9%</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">Luxury kaarsen (premium)</div>
+          <div class="growth-bar-wrap"><div class="growth-bar-fill" style="width:88%;"></div></div>
+          <div class="growth-value">11.1%</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">Pillar / stompkaarsen US</div>
+          <div class="growth-bar-wrap"><div class="growth-bar-fill green" style="width:78%;"></div></div>
+          <div class="growth-value">8.4%</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">Beeswax (premium wax)</div>
+          <div class="growth-bar-wrap"><div class="growth-bar-fill green" style="width:75%;"></div></div>
+          <div class="growth-value">8.4%</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">Wax kaarsen (traditioneel)</div>
+          <div class="growth-bar-wrap"><div class="growth-bar-fill green" style="width:53%;"></div></div>
+          <div class="growth-value">5.6%</div>
+        </div>
+        <div class="growth-row">
+          <div class="growth-label">Tapered kaarsen</div>
+          <div class="growth-bar-wrap"><div class="growth-bar-fill green" style="width:82%;"></div></div>
+          <div class="growth-value">9.0%</div>
+        </div>
+      </div>
+      <p style="margin-top:24px; font-family:var(--display); font-style:italic; color:var(--ink-soft); font-size:15px; max-width:600px;">LED / flameless overtreft elk traditioneel kaarsensegment. Premium en oplaadbaar groeien het hardst — dit zijn precies de termen die nu in Amerika trending zijn op TikTok, Etsy en Amazon.</p>
+    </div>
+
+    <!-- Four trends -->
+    <div class="trend-cards reveal">
+      <div class="trend-card">
+        <div class="trend-num">01.</div>
+        <div class="trend-tag">— Trend uit VS</div>
+        <div class="trend-title">USB-C oplaadbaar vervangt AA-batterijen</div>
+        <p class="trend-desc">Amerikaanse marktanalyses noemen de overgang van CR2032 en AA naar USB-C de hoofd-aankoopdriver voor 2026. Modellen halen 60–120 branduren per lading. In NL nog niche, in DE al sterk vertegenwoordigd in bestsellers.</p>
+        <div class="trend-arrow">Aankomend in NL · 12–18mnd</div>
+      </div>
+      <div class="trend-card">
+        <div class="trend-num">02.</div>
+        <div class="trend-tag">— Trend uit VS</div>
+        <div class="trend-title">3D bewegende vlam wordt standaard</div>
+        <p class="trend-desc">"Moving wick" / "3D flame" technologie commandeert in de VS premiumprijzen (€25–40 per stuk vs €10 voor statische LED). Luminara en Homemory zetten de standaard. NL volgt deze trend al — "bewegende vlam" is cluster #2.</p>
+        <div class="trend-arrow">Al actief in NL · uitbouwen</div>
+      </div>
+      <div class="trend-card">
+        <div class="trend-num">03.</div>
+        <div class="trend-tag">— Trend uit VS</div>
+        <div class="trend-title">IP68 outdoor / weather-proof segment</div>
+        <p class="trend-desc">Een opkomende US-categorie: oplaadbare LED kaarsen met IP68-certificering ("Jacuzzi-tauglich"). Tuin, terras, dakterras, zwembad. In NL/DE markt nog dun — een open product-categorie voor FIDALI.</p>
+        <div class="trend-arrow">Whitespace · 6–12mnd</div>
+      </div>
+      <div class="trend-card">
+        <div class="trend-num">04.</div>
+        <div class="trend-tag">— Trend uit VS</div>
+        <div class="trend-title">Smart home / app-integratie</div>
+        <p class="trend-desc">Zuid-Korea voorop met 9.5% CAGR voor IoT-kaarsen. US-spelers volgen met app-gestuurde timer, brightness en scene-controle. Voor NL nog 2–3 jaar te vroeg, maar relevant voor R&D-roadmap en patent-claims.</p>
+        <div class="trend-arrow">Niet urgent · 24mnd+</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 05: DUITSLAND ========== -->
+  <section id="germany">
+    <div class="section-head reveal">
+      <div class="section-num">05 / Markt · Duitsland</div>
+      <div>
+        <h2 class="section-title">De Duitser koopt<br>meer kaarsen<br>dan wie dan ook<br>in <em>Europa</em>.</h2>
+        <p class="section-desc">Duitsland is de grootste kaarsenimporteur van Europa. 90% van de Duitse consumenten heeft eerder home-fragrance en sfeerverlichting gekocht, 59% gebruikt het regelmatig. De totale kaarsenmarkt is €884M in 2024 → €1.2B in 2030. Een markt die qua taal en cultuur dicht bij Nederland ligt, maar 4× groter is.</p>
+      </div>
+    </div>
+
+    <div class="country-compare reveal">
+      <div class="country-card">
+        <div class="country-flag"><span class="stripe"></span>Nederland · home</div>
+        <div class="country-name">Nederland</div>
+        <div class="country-data">
+          <div class="country-metric">
+            <div class="lbl">Bevolking</div>
+            <div class="val">17.9M</div>
+          </div>
+          <div class="country-metric">
+            <div class="lbl">Kaarsenmarkt</div>
+            <div class="val">~€220M</div>
+          </div>
+          <div class="country-metric">
+            <div class="lbl">LED zoekvol.</div>
+            <div class="val">~18k/mnd</div>
+          </div>
+          <div class="country-metric">
+            <div class="lbl">CAGR kaarsen</div>
+            <div class="val">~5%</div>
+          </div>
+        </div>
+        <p class="country-body">Bewezen vraag, gevestigd kanalen, beheersbare concurrentie. Goede testmarkt voor product-iteraties.</p>
+        <div class="verdict"><span class="dot"></span>Basis · doorgaan</div>
+      </div>
+
+      <div class="country-card focus">
+        <div class="country-flag"><span class="stripe"></span>Doelmarkt · 2026</div>
+        <div class="country-name">Duitsland</div>
+        <div class="country-data">
+          <div class="country-metric">
+            <div class="lbl">Bevolking</div>
+            <div class="val">83.4M</div>
+          </div>
+          <div class="country-metric">
+            <div class="lbl">Kaarsenmarkt</div>
+            <div class="val">€884M</div>
+          </div>
+          <div class="country-metric">
+            <div class="lbl">LED zoekvol.</div>
+            <div class="val">~85k/mnd</div>
+          </div>
+          <div class="country-metric">
+            <div class="lbl">CAGR kaarsen</div>
+            <div class="val">5.6—6.1%</div>
+          </div>
+        </div>
+        <p class="country-body">Grootste kaarsenmarkt van EU. Sterke cultuur rond Advent, kerst, gemütlichkeit. 380 miljoen kaarsen verkocht per jaar. Premiumbewust en sustainability-driven.</p>
+        <div class="verdict go"><span class="dot"></span>GO · prioriteit nr 1</div>
+      </div>
+
+      <div class="country-card">
+        <div class="country-flag"><span class="stripe"></span>Ter referentie</div>
+        <div class="country-name">VS</div>
+        <div class="country-data">
+          <div class="country-metric">
+            <div class="lbl">Bevolking</div>
+            <div class="val">335M</div>
+          </div>
+          <div class="country-metric">
+            <div class="lbl">Kaarsenmarkt</div>
+            <div class="val">$3.8B</div>
+          </div>
+          <div class="country-metric">
+            <div class="lbl">LED CAGR</div>
+            <div class="val">9.5%</div>
+          </div>
+          <div class="country-metric">
+            <div class="lbl">Marktrijpheid</div>
+            <div class="val">Hoog</div>
+          </div>
+        </div>
+        <p class="country-body">Innovatie-leider. Trendwatch, niet directe afzetmarkt — taal-, kanaal- en logistieke barrière hoog voor een NL-startend merk.</p>
+        <div class="verdict wait"><span class="dot"></span>Inspiratie · niet betreden</div>
+      </div>
+    </div>
+
+    <!-- DE keywords -->
+    <div class="de-keywords reveal">
+      <h4>Top zoektermen — <em style="font-style:italic; color:var(--burgundy);">Deutschland</em></h4>
+      <div class="sub">Geschatte maandelijkse Google-volumes · DE</div>
+
+      <div class="kw-pair">
+        <div class="kw-de">LED Kerzen</div>
+        <div class="kw-bar-wrap"><div class="kw-bar-fill" style="width:100%;"></div></div>
+        <div class="kw-vol">22.000</div>
+      </div>
+      <div class="kw-pair">
+        <div class="kw-de">Flammenlose Kerzen</div>
+        <div class="kw-bar-wrap"><div class="kw-bar-fill" style="width:64%;"></div></div>
+        <div class="kw-vol">14.500</div>
+      </div>
+      <div class="kw-pair">
+        <div class="kw-de">LED Echtwachskerzen</div>
+        <div class="kw-bar-wrap"><div class="kw-bar-fill" style="width:42%;"></div></div>
+        <div class="kw-vol">9.800</div>
+      </div>
+      <div class="kw-pair">
+        <div class="kw-de">LED Kerzen mit Timer</div>
+        <div class="kw-bar-wrap"><div class="kw-bar-fill" style="width:36%;"></div></div>
+        <div class="kw-vol">8.100</div>
+      </div>
+      <div class="kw-pair">
+        <div class="kw-de">LED Kerzen aufladbar</div>
+        <div class="kw-bar-wrap"><div class="kw-bar-fill" style="width:32%;"></div></div>
+        <div class="kw-vol">7.200</div>
+      </div>
+      <div class="kw-pair">
+        <div class="kw-de">LED Stabkerzen</div>
+        <div class="kw-bar-wrap"><div class="kw-bar-fill" style="width:28%;"></div></div>
+        <div class="kw-vol">6.400</div>
+      </div>
+      <div class="kw-pair">
+        <div class="kw-de">LED Kerzen Fernbedienung</div>
+        <div class="kw-bar-wrap"><div class="kw-bar-fill" style="width:24%;"></div></div>
+        <div class="kw-vol">5.500</div>
+      </div>
+      <div class="kw-pair">
+        <div class="kw-de">LED Teelichter</div>
+        <div class="kw-bar-wrap"><div class="kw-bar-fill" style="width:22%;"></div></div>
+        <div class="kw-vol">4.900</div>
+      </div>
+      <div class="kw-pair">
+        <div class="kw-de">LED Kerzen Outdoor</div>
+        <div class="kw-bar-wrap"><div class="kw-bar-fill" style="width:14%;"></div></div>
+        <div class="kw-vol">3.100</div>
+      </div>
+      <div class="kw-pair">
+        <div class="kw-de">LED Kerzen Weihnachten</div>
+        <div class="kw-bar-wrap"><div class="kw-bar-fill" style="width:12%;"></div></div>
+        <div class="kw-vol">2.700</div>
+      </div>
+
+      <p style="margin-top:32px; font-family:var(--display); font-style:italic; color:var(--ink-soft); font-size:16px; max-width:640px; line-height:1.55;">Het DE-zoekvolume is bijna <em style="font-style:italic; color:var(--burgundy);">vijf keer hoger</em> dan NL. "Echtwachs" (echte wax-omhulling) is een uniek Duits aankoopcriterium — een sterke USP-mogelijkheid voor FIDALI. Concurrentie is groter (Homemory, Konstsmide, Sirius, Luminara), maar de markt is gefragmenteerd genoeg voor een nieuw premium-merk.</p>
+    </div>
+  </section>
+
+  <!-- ========== 06: TOEKOMSTPLAN ========== -->
+  <section id="plan">
+    <div class="section-head reveal">
+      <div class="section-num">06 / Roadmap</div>
+      <div>
+        <h2 class="section-title">Een eenvoudig<br>plan in <em>drie fases</em>.</h2>
+        <p class="section-desc">Eerst de basis verdiepen in Nederland. Dan de stap naar Duitsland. Daarna pas Europa breder en eventueel de VS via Amazon. Geen sprongen, alleen volgende stappen.</p>
+      </div>
+    </div>
+
+    <div class="roadmap reveal">
+      <!-- Phase 1 -->
+      <div class="phase">
+        <div class="phase-time">
+          <span class="num">01.</span>
+          — Fase 1<br>
+          <span class="period">Q2 — Q4 2026</span>
+        </div>
+        <div class="phase-content">
+          <div class="phase-title">Verdiepen in <em>Nederland</em>.</div>
+          <div class="phase-focus">Focus · NL · 6–9 maanden</div>
+          <ul class="phase-actions">
+            <li>Top-3 cluster content publiceren in augustus voor Q4-piek: "led kaarsen kerst", "bewegende vlam", "oplaadbaar".</li>
+            <li>FIDALI productrange opbouwen rond evergreen ankers — niet alleen kerst, ook horeca en bruiloft.</li>
+            <li>B2B-landingspagina voor horeca-cluster (lage concurrentie, hoge ordergrootte).</li>
+            <li>USB-C oplaadbare lijn lanceren als premium-USP — voorloper op de US-trend.</li>
+            <li>Performance dashboard inrichten: cluster-ranking, conversie per intent, AOV per segment.</li>
+          </ul>
+          <div class="phase-kpi">
+            <span class="lbl">KPI Q4 2026</span>
+            <span class="val">Top-5 ranking op 6 kernclusters</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="phase">
+        <div class="phase-time">
+          <span class="num">02.</span>
+          — Fase 2<br>
+          <span class="period">Q1 — Q4 2027</span>
+        </div>
+        <div class="phase-content">
+          <div class="phase-title">Lanceren in <em>Duitsland</em>.</div>
+          <div class="phase-focus">Expansie · DE · 12 maanden</div>
+          <ul class="phase-actions">
+            <li>Duitse webshop fidali.de met fidali.com als parent-domein. Hreflang correct ingesteld, Duitse content geschreven door native speaker — geen DeepL.</li>
+            <li>"Echtwachs" als product-USP centraal — Duitsers zoeken actief op deze term, NL doet dat niet.</li>
+            <li>Amazon.de als tweede kanaal voor brand-awareness. Bol.com-strategie vertalen naar Otto.de.</li>
+            <li>Februari–maart 2027: content live voor zomerseizoen (Hochzeit, Garten, Balkon). Augustus 2027: Adventszauber-content live.</li>
+            <li>Influencer-seeding bij Duitse interior-accounts (Schöner Wohnen, Westwing-segment).</li>
+          </ul>
+          <div class="phase-kpi">
+            <span class="lbl">KPI eind 2027</span>
+            <span class="val">€500k DE-omzet, eerste Advent-seizoen</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="phase">
+        <div class="phase-time">
+          <span class="num">03.</span>
+          — Fase 3<br>
+          <span class="period">2028+</span>
+        </div>
+        <div class="phase-content">
+          <div class="phase-title">Schaal naar <em>Europa</em>.</div>
+          <div class="phase-focus">Schaal · BE · AT · CH · UK · 18+ maanden</div>
+          <ul class="phase-actions">
+            <li>België als logische derde markt (Vlaanderen op NL-content, Wallonië korte Franse vertaling).</li>
+            <li>Oostenrijk en Zwitserland piggybacken op DE-content (hoge gemütlichkeit-affiniteit, premium-koopkracht).</li>
+            <li>VK met aparte content-strategie als markttest — taal anders, kanalen anders, smaak anders.</li>
+            <li>Smart home / app-integratie als R&D-spoor — IoT-cluster aanboren voordat concurrentie het claimt.</li>
+            <li>Eventueel VS via Amazon.com — alleen als productlijn en marges het toelaten. Anders trendwatch blijven.</li>
+          </ul>
+          <div class="phase-kpi">
+            <span class="lbl">KPI 2029</span>
+            <span class="val">Multi-market premium merk in DACH+BE</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Opportunity matrix -->
+    <div class="opportunity-matrix reveal">
+      <div class="opp">
+        <div class="opp-tag">— Kans 01 · marktgroei</div>
+        <div class="opp-title">De markt groeit <em>sneller</em> dan de concurrentie.</div>
+        <p class="opp-body">LED kaarsen groeien wereldwijd 9.5% per jaar, sneller dan traditionele wax (5.6%). De Nederlandse markt loopt 12–18 maanden achter op de VS — wat nu in Amerika maturity is, wordt hier nog beginnersmarkt. FIDALI kan de trend leiden in plaats van volgen.</p>
+        <div class="opp-meta">
+          <div class="item">CAGR <strong>9.5%</strong></div>
+          <div class="item">Voorsprongvenster <strong>12–18 mnd</strong></div>
+          <div class="item">Risico <strong>laag</strong></div>
+        </div>
+      </div>
+
+      <div class="opp">
+        <div class="opp-tag">— Kans 02 · USB-C koploper</div>
+        <div class="opp-title">USB-C oplaadbaar is het <em>nieuwe</em> standaard.</div>
+        <p class="opp-body">De VS-overstap van AA-batterijen naar USB-C is in volle gang. NL-shoppers zoeken al op "oplaadbaar" (1.600/mnd) en het volume groeit jaarlijks. Wie de USB-C lijn nu lanceert als premium-positionering, vangt de trend op weg in plaats van laat.</p>
+        <div class="opp-meta">
+          <div class="item">NL volume <strong>+1.600/mnd</strong></div>
+          <div class="item">DE volume <strong>+7.200/mnd</strong></div>
+          <div class="item">Marge <strong>+40%</strong></div>
+        </div>
+      </div>
+
+      <div class="opp">
+        <div class="opp-tag">— Kans 03 · DE markt</div>
+        <div class="opp-title">Duitsland is <em>4× zo groot</em>, taalbarrière beperkt.</div>
+        <p class="opp-body">€884M kaarsenmarkt vs €220M in Nederland. 90% van de Duitse consumenten heeft eerder home-fragrance gekocht. Echtwachs-cultuur, Adventscultuur, en hoge premium-bereidheid. Voor een NL-merk de meest logische eerste exportstap — kortere afstand dan UK, geen taalrevolutie zoals Frankrijk.</p>
+        <div class="opp-meta">
+          <div class="item">Markt <strong>€884M</strong></div>
+          <div class="item">CAGR <strong>5.6–6.1%</strong></div>
+          <div class="item">Logistiek <strong>1 dag</strong></div>
+        </div>
+      </div>
+
+      <div class="opp">
+        <div class="opp-tag">— Kans 04 · B2B horeca</div>
+        <div class="opp-title">B2B horeca is een <em>aparte</em> markt.</div>
+        <p class="opp-body">Het hospitality-segment koopt LED kaarsen voor restaurants, hotels, spa's en eventlocaties — primair om brandveiligheid en duurzaamheid. Lage concurrentie op de keyword-cluster, hoge ordergrootte, lange contracten. In DE nog explicieter: "LED Kerzen Gastronomie" is een gevestigde zoekterm.</p>
+        <div class="opp-meta">
+          <div class="item">Concurrentie <strong>laag</strong></div>
+          <div class="item">AOV <strong>10×</strong></div>
+          <div class="item">LTV <strong>3+ jaar</strong></div>
+        </div>
+      </div>
+
+      <div class="opp">
+        <div class="opp-tag">— Kans 05 · outdoor</div>
+        <div class="opp-title">Outdoor / IP68 is <em>open</em> terrein.</div>
+        <p class="opp-body">In de VS verschijnen IP68-gecertificeerde oplaadbare LED kaarsen ("waterproof for the hot tub"). In Nederland en Duitsland nog geen sterke spelers. Klein cluster maar groeiend — bruikbaar voor terras, tuin, dakterras, bruiloft, horecaterras. Tweede seizoen naast kerst.</p>
+        <div class="opp-meta">
+          <div class="item">Pioniersmarkt</div>
+          <div class="item">Mei-piek</div>
+          <div class="item">Premium-prijs <strong>€35+</strong></div>
+        </div>
+      </div>
+
+      <div class="opp">
+        <div class="opp-tag">— Kans 06 · premiumisering</div>
+        <div class="opp-title">Premium <em>verslaat</em> mass-market.</div>
+        <p class="opp-body">Luxury kaarsen groeien met 11.1% CAGR — bijna twee keer zo snel als de massamarkt. Action en Ikea zijn de prijsbodem, FIDALI hoeft daar niet te concurreren. Cormorant typografie, echtwachsmantel, geluidloze mechaniek, mooi verpakt — daar zit de marge én de merkwaarde.</p>
+        <div class="opp-meta">
+          <div class="item">Luxury CAGR <strong>11.1%</strong></div>
+          <div class="item">Mass CAGR <strong>3–5%</strong></div>
+          <div class="item">Marge <strong>2–3×</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <div class="closing reveal">
+    <div class="marker">— Slotwoord —</div>
+    <h2>Eerst Nederland verdiepen. Dan <em>Duitsland</em>.<br>Daarna pas verder kijken.</h2>
+    <p class="signoff">De markt groeit sneller dan FIDALI nu groeit. Dat is de kans. Wie de volgende twee jaar Q4 organisch wint in NL en in Q4 2027 staat te leveren in Duitsland, bouwt het premium LED-kaarsenmerk dat Europa nog niet heeft.</p>
+  </div>
+
+  <footer>
+    <div class="brand">FIDALI</div>
+    <div>First Day Light · Keyword Study · Mei 2026</div>
+  </footer>
+
+</div>
+
+<script>
+// =========================================================
+// DATA
+// =========================================================
+const clusters = [
+  { n:1, name:"LED kaarsen", vol:5400, intent:"trans", intentLabel:"Transactioneel", comp:78, longtails:[
+    {t:"led kaarsen kopen", v:880},
+    {t:"led kaarsen action", v:720},
+    {t:"led kaarsen ikea", v:480},
+    {t:"goedkope led kaarsen", v:390},
+    {t:"led kaarsen kwaliteit", v:260},
+    {t:"beste led kaarsen", v:210},
+    {t:"led kaarsen review", v:140},
+  ]},
+  { n:2, name:"LED kaarsen met bewegende vlam", vol:3200, intent:"trans", intentLabel:"Transactioneel", comp:64, longtails:[
+    {t:"led kaars met bewegende vlam", v:1100},
+    {t:"flikkerende led kaars", v:620},
+    {t:"led kaars dansende vlam", v:340},
+    {t:"realistische led kaars", v:290},
+    {t:"led kaars met echte vlam", v:210},
+    {t:"led kaars 3d vlam", v:180},
+  ]},
+  { n:3, name:"LED kaarsen kerst", vol:2800, intent:"trans", intentLabel:"Transactioneel", comp:71, longtails:[
+    {t:"led kaarsen kerstboom", v:840},
+    {t:"led kerstkaarsen raam", v:560},
+    {t:"led kaarsen voor adventskrans", v:380},
+    {t:"witte led kerstkaarsen", v:290},
+    {t:"led kerstkaarsen op batterijen", v:220},
+    {t:"led kaarsen kerststuk", v:180},
+    {t:"led kaarsen voor in de boom", v:110},
+  ]},
+  { n:4, name:"LED kaarsen op batterijen", vol:1900, intent:"comm", intentLabel:"Commercieel", comp:52, longtails:[
+    {t:"led kaars batterij", v:680},
+    {t:"led kaarsen aa batterij", v:340},
+    {t:"hoe lang gaan led kaarsen op batterij mee", v:230},
+    {t:"led kaarsen welke batterijen", v:180},
+    {t:"led kaarsen zonder snoer", v:160},
+    {t:"led kaars knoopcel", v:90},
+  ]},
+  { n:5, name:"LED kaarsen oplaadbaar", vol:1600, intent:"trans", intentLabel:"Transactioneel", comp:48, longtails:[
+    {t:"oplaadbare led kaarsen", v:720},
+    {t:"led kaarsen usb oplaadbaar", v:380},
+    {t:"oplaadbare led kaars buiten", v:210},
+    {t:"led kaarsen oplaadbaar set", v:140},
+    {t:"oplaadbare kaars draadloos", v:110},
+    {t:"led kaars met dock", v:80},
+  ]},
+  { n:6, name:"LED kaarsen buiten", vol:1300, intent:"trans", intentLabel:"Transactioneel", comp:42, longtails:[
+    {t:"led kaarsen buiten waterdicht", v:480},
+    {t:"led kaarsen tuin", v:290},
+    {t:"led kaarsen op zonne-energie", v:240},
+    {t:"led tuinkaarsen", v:160},
+    {t:"buitenkaars led groot", v:120},
+    {t:"led kaars terras", v:90},
+  ]},
+  { n:7, name:"LED kaarsen met afstandsbediening", vol:1100, intent:"comm", intentLabel:"Commercieel", comp:55, longtails:[
+    {t:"led kaars afstandsbediening", v:520},
+    {t:"led kaarsen set met afstandsbediening", v:290},
+    {t:"led kaarsen timer afstandsbediening", v:140},
+    {t:"led kaars universele afstandsbediening", v:80},
+    {t:"hoe werkt led kaars afstandsbediening", v:50},
+    {t:"led kaars met app", v:40},
+  ]},
+  { n:8, name:"LED dinerkaarsen", vol:980, intent:"trans", intentLabel:"Transactioneel", comp:58, longtails:[
+    {t:"led dinerkaars", v:420},
+    {t:"led kaars lang", v:230},
+    {t:"slanke led kaars", v:140},
+    {t:"led dinerkaarsen set", v:90},
+    {t:"led kaars 25 cm", v:70},
+    {t:"led kaars voor kandelaar", v:60},
+  ]},
+  { n:9, name:"LED waxinelichtjes", vol:870, intent:"trans", intentLabel:"Transactioneel", comp:46, longtails:[
+    {t:"led waxinelichtjes", v:440},
+    {t:"led theelichtjes", v:230},
+    {t:"led waxine op batterij", v:90},
+    {t:"led waxinelichtjes set", v:60},
+    {t:"oplaadbare led theelichtjes", v:40},
+    {t:"led waxine buiten", v:30},
+  ]},
+  { n:10, name:"LED stompkaarsen", vol:760, intent:"trans", intentLabel:"Transactioneel", comp:51, longtails:[
+    {t:"led stompkaars", v:380},
+    {t:"dikke led kaars", v:180},
+    {t:"led stompkaars groot", v:90},
+    {t:"led stompkaars wax", v:60},
+    {t:"led stompkaars echt", v:40},
+    {t:"led stompkaars set 3", v:30},
+  ]},
+  { n:11, name:"LED kaarsen met timer", vol:680, intent:"comm", intentLabel:"Commercieel", comp:38, longtails:[
+    {t:"led kaars met timer", v:340},
+    {t:"led kaars 6 uur timer", v:120},
+    {t:"led kaars automatisch aan", v:80},
+    {t:"led kaars 5 uur timer", v:60},
+    {t:"led kaarsen timer instellen", v:40},
+    {t:"led kaars met dag/nacht sensor", v:30},
+  ]},
+  { n:12, name:"Echte wax LED kaarsen", vol:620, intent:"comm", intentLabel:"Commercieel", comp:36, longtails:[
+    {t:"led kaars echte wax", v:280},
+    {t:"led kaarsen van bijenwas", v:140},
+    {t:"led kaars natuurlijke wax", v:80},
+    {t:"echte kaars led look", v:60},
+    {t:"led kaarsen luxe wax", v:40},
+    {t:"led kaars handgemaakt wax", v:20},
+  ]},
+  { n:13, name:"LED kaarsen kandelaar", vol:540, intent:"trans", intentLabel:"Transactioneel", comp:44, longtails:[
+    {t:"led kaars in kandelaar", v:240},
+    {t:"kandelaar led kaarsen set", v:120},
+    {t:"led kaars 5 armige kandelaar", v:60},
+    {t:"led kaars zilveren kandelaar", v:50},
+    {t:"led kaars hangkandelaar", v:40},
+    {t:"led kaars wandkandelaar", v:30},
+  ]},
+  { n:14, name:"LED kaarsen wit", vol:510, intent:"trans", intentLabel:"Transactioneel", comp:39, longtails:[
+    {t:"witte led kaarsen", v:280},
+    {t:"led kaarsen ivoor", v:90},
+    {t:"led kaarsen wit groot", v:60},
+    {t:"led kaarsen wit set", v:40},
+    {t:"led kaarsen mat wit", v:20},
+    {t:"witte led kaars dimbaar", v:20},
+  ]},
+  { n:15, name:"LED kaarsen zwart", vol:390, intent:"trans", intentLabel:"Transactioneel", comp:28, longtails:[
+    {t:"zwarte led kaarsen", v:210},
+    {t:"led kaars zwart modern", v:70},
+    {t:"zwarte stompkaars led", v:40},
+    {t:"led kaars antraciet", v:30},
+    {t:"zwarte led dinerkaars", v:25},
+    {t:"led kaars zwart goud", v:15},
+  ]},
+  { n:16, name:"LED kaarsen horeca", vol:480, intent:"trans", intentLabel:"Transactioneel B2B", comp:24, longtails:[
+    {t:"led kaarsen horeca", v:180},
+    {t:"led kaarsen restaurant", v:120},
+    {t:"oplaadbare led kaarsen horeca", v:80},
+    {t:"led kaarsen voor op tafel", v:50},
+    {t:"led tafelkaarsen restaurant", v:30},
+    {t:"led kaars commercieel", v:20},
+  ]},
+  { n:17, name:"LED kaarsen bruiloft", vol:450, intent:"trans", intentLabel:"Transactioneel", comp:34, longtails:[
+    {t:"led kaarsen bruiloft", v:220},
+    {t:"led kaarsen trouwerij", v:90},
+    {t:"led kaars decoratie bruiloft", v:60},
+    {t:"led kaarsen aankleding receptie", v:40},
+    {t:"led kaarsen huren bruiloft", v:25},
+    {t:"led kaarsen ceremonie buiten", v:15},
+  ]},
+  { n:18, name:"LED kaarsen groot formaat", vol:340, intent:"trans", intentLabel:"Transactioneel", comp:31, longtails:[
+    {t:"grote led kaars", v:160},
+    {t:"led kaars 30 cm", v:60},
+    {t:"xxl led kaars", v:40},
+    {t:"led stompkaars 20 cm", v:35},
+    {t:"hoge led kaars", v:25},
+    {t:"led kaars 40 cm", v:20},
+  ]},
+  { n:19, name:"LED kaarsen veilig", vol:290, intent:"info", intentLabel:"Informatief", comp:18, longtails:[
+    {t:"zijn led kaarsen veilig", v:120},
+    {t:"led kaars huisdier veilig", v:60},
+    {t:"led kaars kinderen", v:40},
+    {t:"led kaars brandveilig", v:35},
+    {t:"led kaars overal gebruiken", v:20},
+    {t:"led kaars rookmelder", v:15},
+  ]},
+  { n:20, name:"LED kaarsen merken", vol:260, intent:"nav", intentLabel:"Navigationeel", comp:22, longtails:[
+    {t:"luminara led kaarsen", v:90},
+    {t:"sirius led kaarsen", v:60},
+    {t:"konstsmide led kaars", v:40},
+    {t:"philippi led kaars", v:30},
+    {t:"led kaars merken vergelijken", v:25},
+    {t:"beste merk led kaars", v:15},
+  ]},
+];
+
+const months = ["Jan","Feb","Mrt","Apr","Mei","Jun","Jul","Aug","Sep","Okt","Nov","Dec"];
+
+const seasonalityCandles = [
+  { name:"LED kaarsen (algemeen)", vol:5400, data:[55,50,52,55,58,52,48,55,68,82,100,92] },
+  { name:"LED kaarsen met bewegende vlam", vol:3200, data:[58,55,55,55,55,52,50,58,72,85,100,95] },
+  { name:"LED kaarsen kerst", vol:2800, data:[10,8,9,10,12,15,18,30,55,82,100,88] },
+  { name:"LED kaarsen op batterijen", vol:1900, data:[60,58,60,62,65,58,55,62,72,82,100,90] },
+  { name:"LED kaarsen oplaadbaar", vol:1600, data:[62,60,62,65,68,62,58,65,72,80,100,90] },
+  { name:"LED kaarsen buiten", vol:1300, data:[35,40,55,75,92,100,98,88,72,50,40,32] },
+  { name:"LED kaarsen afstandsbediening", vol:1100, data:[68,65,65,68,70,62,58,68,75,82,100,88] },
+  { name:"LED dinerkaarsen", vol:980, data:[28,30,32,38,40,38,35,42,58,78,100,82] },
+  { name:"LED waxinelichtjes", vol:870, data:[55,52,55,55,58,52,48,55,68,82,100,88] },
+  { name:"LED kaarsen bruiloft", vol:450, data:[42,48,58,72,88,100,95,85,72,58,38,28] },
+];
+
+// =========================================================
+// CLUSTERS RENDER
+// =========================================================
+function intentClass(i) { return 'intent-' + i; }
+
+function renderClusters(filter='all') {
+  const grid = document.getElementById('clusters-grid');
+  const filtered = filter === 'all' ? clusters : clusters.filter(c => c.intent === filter);
+  grid.innerHTML = filtered.map(c => `
+    <div class="cluster" data-intent="${c.intent}" data-id="${c.n}">
+      <div class="toggle-icon">+</div>
+      <div class="cluster-head">
+        <div>
+          <div class="cluster-num">${String(c.n).padStart(2,'0')} / 20</div>
+          <div class="cluster-name">${c.name}</div>
+        </div>
+      </div>
+      <div class="cluster-meta">
+        <span class="cluster-vol">${c.vol.toLocaleString('nl-NL')}</span>
+        <span class="cluster-vol-sub">zoekopdrachten /maand</span>
+      </div>
+      <div class="cluster-intent ${intentClass(c.intent)}">
+        <span class="d"></span>${c.intentLabel}
+      </div>
+
+      <div class="cluster-details">
+        <div class="longtail-label">— Long tail variaties</div>
+        <ul class="longtail">
+          ${c.longtails.map(lt => `<li><span>${lt.t}</span><span class="lt-vol">${lt.v.toLocaleString('nl-NL')} /mnd</span></li>`).join('')}
+        </ul>
+        <div class="competition">
+          <span class="comp-label">Concurrentie</span>
+          <div class="comp-bar"><div class="comp-fill" style="width:${c.comp}%"></div></div>
+          <span class="comp-value">${c.comp}/100</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  document.querySelectorAll('.cluster').forEach(el => {
+    el.addEventListener('click', () => el.classList.toggle('open'));
+  });
+}
+
+renderClusters();
+
+document.querySelectorAll('.chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    renderClusters(chip.dataset.filter);
+  });
+});
+
+// =========================================================
+// HEATMAP — warm palette (cream → terracotta → burgundy)
+// =========================================================
+function heatColor(v) {
+  if (v < 15) return '#f0e8d8';
+  if (v < 30) return '#ecdec7';
+  if (v < 45) return '#e8d4b8';
+  if (v < 60) return '#d4a888';
+  if (v < 75) return '#b5573d';
+  if (v < 90) return '#8a2a2a';
+  return '#6b1f2a';
+}
+function textOnHeat(v) {
+  return v < 60 ? 'var(--ink-soft)' : 'var(--cream)';
+}
+
+function renderHeatmap(target, data) {
+  const el = document.getElementById(target);
+  const header = `
+    <div class="heat-h label">Cluster</div>
+    ${months.map(m => `<div class="heat-h">${m}</div>`).join('')}
+  `;
+  const rows = data.map(row => `
+    <div class="heat-row-label">
+      <span>${row.name}</span>
+      <span class="vol">${row.vol.toLocaleString('nl-NL')}/mnd</span>
+    </div>
+    ${row.data.map((v, i) => {
+      const color = heatColor(v);
+      const txt = textOnHeat(v);
+      return `<div class="heat-cell" data-tip="${months[i]} · ${v}" style="background:${color}; color:${txt}">${v}</div>`;
+    }).join('')}
+  `).join('');
+  el.innerHTML = header + rows;
+}
+
+renderHeatmap('heatmap-candles', seasonalityCandles);
+
+// =========================================================
+// TIMING TRACK
+// =========================================================
+function renderTiming() {
+  const track = document.getElementById('timing-track');
+  let html = `<div class="timing-month label">Cluster</div>`;
+  months.forEach((m, i) => {
+    const q4 = i >= 9 && i <= 11;
+    const q2 = i >= 3 && i <= 5;
+    const cls = q4 ? 'q4' : (q2 ? 'q2' : '');
+    html += `<div class="timing-month ${cls}">${m}</div>`;
+  });
+
+  const tracks = [
+    { name:"Kerst content", prep:[6,7], publish:[7,9], peak:[10,11] },
+    { name:"Buiten / tuin", prep:[0,1], publish:[1,3], peak:[4,6] },
+    { name:"Bruiloft", prep:[1,2], publish:[2,3], peak:[4,6] },
+    { name:"Evergreen", prep:[0,-1], publish:[0,11], peak:[0,11] },
+  ];
+
+  tracks.forEach(t => {
+    html += `<div class="timing-label">${t.name}</div>`;
+    for (let i = 0; i < 12; i++) {
+      html += `<div class="timing-cell">`;
+      const inPrep = i >= t.prep[0] && i <= t.prep[1];
+      const inPub = i >= t.publish[0] && i <= t.publish[1];
+      const inPeak = i >= t.peak[0] && i <= t.peak[1];
+      let phase = null;
+      if (inPeak) phase = 'peak';
+      else if (inPub) phase = 'publish';
+      else if (inPrep) phase = 'prep';
+      if (phase) {
+        html += `<div class="timing-bar ${phase}"></div>`;
+      }
+      html += `</div>`;
+    }
+  });
+
+  track.innerHTML = html;
+}
+renderTiming();
+
+// =========================================================
+// DONUT — Intent distribution
+// =========================================================
+function renderDonut() {
+  // Aggregate volume per intent
+  const totals = clusters.reduce((acc, c) => {
+    acc[c.intent] = (acc[c.intent] || 0) + c.vol;
+    return acc;
+  }, {});
+  const total = Object.values(totals).reduce((a,b) => a+b, 0);
+
+  const intents = [
+    { key:'trans', label:'Transactioneel', color:'#6b1f2a' },
+    { key:'comm', label:'Commercieel', color:'#c9985a' },
+    { key:'info', label:'Informatief', color:'#c9b896' },
+    { key:'nav', label:'Navigationeel', color:'#b5573d' },
+  ];
+
+  // SVG segments
+  const r = 80, cx = 100, cy = 100;
+  const circumference = 2 * Math.PI * r;
+  let offset = 0;
+  const segments = document.getElementById('donut-segments');
+
+  intents.forEach(intent => {
+    const vol = totals[intent.key] || 0;
+    const pct = vol / total;
+    const dashLength = pct * circumference;
+    const gap = circumference - dashLength;
+
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', cx);
+    circle.setAttribute('cy', cy);
+    circle.setAttribute('r', r);
+    circle.setAttribute('fill', 'none');
+    circle.setAttribute('stroke', intent.color);
+    circle.setAttribute('stroke-width', '24');
+    circle.setAttribute('stroke-dasharray', `${dashLength} ${gap}`);
+    circle.setAttribute('stroke-dashoffset', `${-offset}`);
+    circle.setAttribute('transform', `rotate(-90 ${cx} ${cy})`);
+    segments.appendChild(circle);
+    offset += dashLength;
+  });
+
+  // List
+  const list = document.getElementById('intent-list');
+  list.innerHTML = intents.map(intent => {
+    const vol = totals[intent.key] || 0;
+    const pct = ((vol / total) * 100).toFixed(1);
+    return `
+      <li>
+        <span class="swatch" style="background:${intent.color}"></span>
+        <span class="name">${intent.label}</span>
+        <span class="vol">${vol.toLocaleString('nl-NL')}/mnd</span>
+        <span class="pct">${pct}%</span>
+      </li>
+    `;
+  }).join('');
+}
+renderDonut();
+
+// =========================================================
+// SCROLL REVEAL
+// =========================================================
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
